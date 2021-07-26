@@ -90,6 +90,15 @@ struct OPT3001 {
 class ClosedCube_OPT3001 {
 public:
 	ClosedCube_OPT3001();
+	
+	
+	Sensor *sensor_status = new Sensor();
+	Sensor *manufacturer_id_sensor = new Sensor();
+	Sensor *device_id_sensor = new Sensor();
+	Sensor *lux_sensor = new Sensor();
+	Sensor *high_limit_sensor = new Sensor();
+	Sensor *low_limit_sensor = new Sensor();
+
 
 	OPT3001_ErrorCode begin(uint8_t address);
 
