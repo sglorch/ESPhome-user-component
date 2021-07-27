@@ -5,7 +5,7 @@
 #include "esphome/components/i2c/i2c.h"
 #include "esphome/core/log.h"
 
-#include "ClosedCube_OPT3001/ClosedCube_OPT3001.h"
+#include "ClosedCube_OPT3001.h"
 
 
 namespace esphome {
