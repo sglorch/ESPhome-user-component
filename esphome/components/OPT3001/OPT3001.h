@@ -15,19 +15,10 @@ class MyOPT3001 : public PollingComponent {
  public:
 
   ClosedCube_OPT3001 myself;
-  Sensor *sensor_status = new Sensor();
-  Sensor *manufacturer_id_sensor = new Sensor();
-  Sensor *device_id_sensor = new Sensor();
-  Sensor *lux_sensor = new Sensor();
-  Sensor *high_limit_sensor = new Sensor();
-  Sensor *low_limit_sensor = new Sensor();
-
-  // Update every 5s (value in ms)
-  MyOPT3001() : PollingComponent(5000) { }
-
+  
   void setup() override {
     // myself.initSHT20();    // Init SHT20 Sensor
-    myself.begin(0x44);
+    myself.begin(0x45);
     delay(100);
     configureSensor();
     delay(100);
