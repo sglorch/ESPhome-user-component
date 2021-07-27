@@ -22,9 +22,8 @@ class OPT3001Component : public PollingComponent, public i2c::I2CDevice {
    
   void configureSensor();
 
-  sensor::Sensor *temperature_sensor_;
-  sensor::Sensor *humidity_sensor_;
+  sensor::Sensor *luminosity_sensor_;
 };
 
-}  // namespace sht3xd
+}  // namespace opt3001
 }  // namespace esphome

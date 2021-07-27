@@ -7,19 +7,18 @@ namespace opt3001 {
   ClosedCube_OPT3001 myopt3001;
   
   void OPT3001Component::setup(){
-    // myopt3001.initSHT20();    // Init SHT20 Sensor
-    myopt3001.begin(0x44);
+    
+    myopt3001.begin(0x45);
     delay(100);
     configureSensor();
     delay(100);
-    // myopt3001.checkSHT20();   // Check SHT20 Sensor
     myopt3001.readManufacturerID();
     myopt3001.readDeviceID();
   }
 
   // Most of this copied from https://github.com/closedcube/ClosedCube_OPT3001_Arduino/blob/master/examples/opt3001demo/opt3001demo.ino
   // I have no real idea what I'm doing.
-  void configureSensor() {
+  void OPT3001Component::configureSensor() {
     OPT3001_Config newConfig;
 
     newConfig.RangeNumber = B1100;
