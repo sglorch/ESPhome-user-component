@@ -20,7 +20,7 @@ from esphome.const import (
 DEPENDENCIES = ["i2c"]
 
 opt3001_ns = cg.esphome_ns.namespace("OPT3001")
-OPT3001Component = OPT3001_ns.class_(
+OPT3001Component = opt3001_ns.class_(
     "OPT3001Component", cg.PollingComponent, i2c.I2CDevice
 )
 
@@ -38,7 +38,7 @@ CONFIG_SCHEMA = (
          }
     )
     .extend(cv.polling_component_schema("5s"))
-    .extend(i2c.i2c_device_schema(0x44))
+    .extend(i2c.i2c_device_schema(0x45))
 )
 
 
