@@ -65,7 +65,7 @@ namespace opt3001 {
   void OPT3001Component::update() {
     ESP_LOGD("update", "Sending update");
     int lux_level = myopt3001.readResult().lux;
-    lux_sensor->publish_state(lux_level);
+    luminosity_sensor->publish_state(lux_level);
   }
 
 }  // namespace opt3001

@@ -7,6 +7,7 @@ from esphome.const import (
     CONF_LIGHTNING_ENERGY,
     CONF_TEMPERATURE,
     DEVICE_CLASS_HUMIDITY,
+    DEVICE_CLASS_ILLUMINANCE,
     DEVICE_CLASS_LIGHT,
     DEVICE_CLASS_TEMPERATURE,
     ICON_EMPTY,
@@ -32,7 +33,7 @@ CONFIG_SCHEMA = (
                 UNIT_LUX,
                 ICON_LIGHTBULB,
                 1,
-                DEVICE_CLASS_LIGHT,
+                DEVICE_CLASS_ILLUMINANCE,
                 STATE_CLASS_MEASUREMENT,
             ),
          }

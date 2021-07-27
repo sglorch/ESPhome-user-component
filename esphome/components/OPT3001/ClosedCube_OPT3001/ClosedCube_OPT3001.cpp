@@ -31,7 +31,6 @@ THE SOFTWARE.
 
 #ifndef CLOSEDCUBE_OPT3001
 #define CLOSEDCUBE_OPT3001
-
 #include "ClosedCube_OPT3001.h"
 
 ClosedCube_OPT3001::ClosedCube_OPT3001()
