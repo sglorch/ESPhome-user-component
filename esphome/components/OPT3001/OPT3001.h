@@ -1,7 +1,9 @@
 #include "esphome.h"
 #include "ClosedCube_OPT3001.h"
 
-using namespace esphome;
+
+namespace esphome {
+namespace opt3001 {
 
 class MyOPT3001 : public PollingComponent {
  public:
@@ -80,3 +82,5 @@ class MyOPT3001 : public PollingComponent {
     lux_sensor->publish_state(lux_level);
   }
 };
+}// Namespace ESP
+}// Namespace OPT3001
