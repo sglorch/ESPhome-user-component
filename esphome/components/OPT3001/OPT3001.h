@@ -3,7 +3,7 @@
 #include "esphome/core/component.h"
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/i2c/i2c.h"
-#include "ClosedCube_OPT3001/ClosedCube_OPT3001.h"
+#include "ClosedCube_OPT3001.h"
 
 
 namespace esphome {
