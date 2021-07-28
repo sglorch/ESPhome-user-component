@@ -63,7 +63,18 @@ static const char *const TAG = "opt3001";
 
     u_short error_code = myself.readResult().error;
   }
+  void SHT3XDComponent::dump_config() {
+  ESP_LOGCONFIG(TAG, "OPT3001:");
+  LOG_I2C_DEVICE(this);
+  if (this->is_failed()) {
+    ESP_LOGE(TAG, "Communication with OPT3001 failed!");
+  }
+  LOG_UPDATE_INTERVAL(this);
 
+  LOG_SENSOR("  ", "Ambient: ", this->ambient_light_sensor_);
+}
+  
+  float OPT3001Component::get_setup_priority() const { return setup_priority::DATA; }
   void OPT3001Component::update() {
     ESP_LOGD("update", "Sending update");
     int lux_level = myself.readResult().lux;
