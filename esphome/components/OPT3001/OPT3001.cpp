@@ -1,4 +1,4 @@
-#include "sht3xd.h"
+#include "OPT3001.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
