@@ -1,4 +1,5 @@
 #include "OPT3001.h"
+#include "ClosedCube_OPT3001.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
@@ -8,7 +9,7 @@ static const char *const TAG = "opt3001";
 
   ClosedCube_OPT3001 myself;
   
-  void OPT3001Component:setup () {
+  void OPT3001Component::setup () {
     myself.begin(0x45);
     delay(100);
     configureSensor_();
