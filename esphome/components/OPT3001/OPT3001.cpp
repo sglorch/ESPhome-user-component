@@ -63,7 +63,7 @@ static const char *const TAG = "opt3001";
 
     u_short error_code = myself.readResult().error;
   }
-  void SHT3XDComponent::dump_config() {
+  void OPT3001Component::dump_config() {
   ESP_LOGCONFIG(TAG, "OPT3001:");
   LOG_I2C_DEVICE(this);
   if (this->is_failed()) {
