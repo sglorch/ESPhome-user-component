@@ -50,24 +50,24 @@ static const char *const TAG = "opt3001";
     }
 
     u_short manufacturer_id = myself.readManufacturerID();
-    manufacturer_id_sensor->publish_state(manufacturer_id);
+    this->ambient_light_sensor_->publish_state(manufacturer_id);
 
     u_short device_id = myself.readDeviceID();
-    device_id_sensor->publish_state(device_id);
+    this->ambient_light_sensor_->publish_state(device_id);
 
     u_short high_limit = myself.readHighLimit().lux;
-    high_limit_sensor->publish_state(high_limit);
+    this->ambient_light_sensor_->publish_state(high_limit);
 
     u_short low_limit = myself.readLowLimit().lux;
-    low_limit_sensor->publish_state(low_limit);
+    this->ambient_light_sensor_->publish_state(low_limit);
 
     u_short error_code = myself.readResult().error;
   }
 
-  void update() override {
+  void OPT3001Component::update() {
     ESP_LOGD("update", "Sending update");
     int lux_level = myself.readResult().lux;
-    lux_sensor->publish_state(lux_level);
+    this->ambient_light_sensor_->publish_state(lux_level);
   }
 };
 }// Namespace ESP
