@@ -14,27 +14,33 @@ from esphome.const import (
 
 DEPENDENCIES = ["i2c"]
 
-opt3001_ns = cg.esphome_ns.namespace("opt3001")
-OPT3001Component = opt3001_ns.class_(
-    "OPT3001Component", cg.PollingComponent, i2c.I2CDevice
+mpl3115_ns = cg.esphome_ns.namespace("mpl3115")
+MPL3115Component = mpl3115_ns.class_(
+    "MPL3115Component", cg.PollingComponent, i2c.I2CDevice
 )
 
 CONFIG_SCHEMA = (
     cv.Schema(
         {
-            cv.GenerateID(): cv.declare_id(OPT3001Component),
-            cv.Required(CONF_ILLUMINANCE): sensor.sensor_schema(
-                unit_of_measurement=UNIT_LUX,
-                icon=ICON_EMPTY,
+            cv.GenerateID(): cv.declare_id(MPL3115Component),
+            cv.Required(CONF_TEMPERATURE): sensor.sensor_schema(
+                unit_of_measurement=UNIT_CELSIUS,
                 accuracy_decimals=1,
-                device_class=DEVICE_CLASS_ILLUMINANCE,
+                device_class=DEVICE_CLASS_TEMPERATURE,
+                state_class=STATE_CLASS_MEASUREMENT,
+            ),
+            cv.Required(CONF_PRESSURE): sensor.sensor_schema(
+                unit_of_measurement=UNIT_HECTOPASCAL,
+                icon=ICON_GAUGE,
+                accuracy_decimals=1,
+                device_class=DEVICE_CLASS_PRESSURE,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
            
         }
     )
     .extend(cv.polling_component_schema("5s"))
-    .extend(i2c.i2c_device_schema(0x45))
+    .extend(i2c.i2c_device_schema(0x60))
 )
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
