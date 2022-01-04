@@ -2,13 +2,23 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import i2c, sensor
 from esphome.const import (
+    CONF_ALTITUDE,
     CONF_ID,
     CONF_ILLUMINANCE,
+    CONF_PRESSURE,
     CONF_TEMPERATURE,
     DEVICE_CLASS_ILLUMINANCE,
+    DEVICE_CLASS_NITROGEN_DIOXIDE,
+    DEVICE_CLASS_PRESSURE,
+    DEVICE_CLASS_TEMPERATURE,
     ICON_EMPTY,
+    ICON_GAUGE,
+    ICON_RULER,
     STATE_CLASS_MEASUREMENT,
+    UNIT_CELSIUS,
+    UNIT_HECTOPASCAL,
     UNIT_LUX,
+    UNIT_METER,
 
 )
 
@@ -32,6 +42,13 @@ CONFIG_SCHEMA = (
             cv.Required(CONF_PRESSURE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_HECTOPASCAL,
                 icon=ICON_GAUGE,
+                accuracy_decimals=1,
+                device_class=DEVICE_CLASS_PRESSURE,
+                state_class=STATE_CLASS_MEASUREMENT,
+            ),
+            cv.Required(CONF_ALTITUDE): sensor.sensor_schema(
+                unit_of_measurement=UNIT_METER,
+                icon=ICON_RULER,
                 accuracy_decimals=1,
                 device_class=DEVICE_CLASS_PRESSURE,
                 state_class=STATE_CLASS_MEASUREMENT,
