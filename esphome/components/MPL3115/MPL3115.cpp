@@ -1,6 +1,7 @@
 #include "MPL3115.h"
 #include "SparkFunMPL3115A2.h"
 #include "esphome/core/log.h"
+#include "Wire.h" // for IIC communication
 
 #define MPL3115A2_ADDRESS 0x60 // 7-bit I2C address
 
@@ -12,10 +13,10 @@ namespace mpl3115 {
 
 static const char *const TAG = "mpl3115";
 //Create an instance of the object
-  MPL3115 myMpl3115;
+  MPL3115A2 myMpl3115;
   
   void MPL3115Component::setup () {
-    myMpl3115.begin(0x60);
+    myMpl3115.begin();
     delay(100);
     configureSensor_();
     delay(100);
@@ -32,8 +33,8 @@ static const char *const TAG = "mpl3115";
   myMpl3115.enableEventFlags(); // Enable all three pressure and temp event flags 
 
    
-   u_short manufacturer_id = IIC_Read(WHO_AM_I); 
-    if (device_id != 196)
+   u_short manufacturer_id = myMpl3115.readManufacturer_id(); 
+    if (manufacturer_id != 196)
       ESP_LOGD("error","Device nicht gefiunden");
     else {
       ESP_LOGD("config","MPL3115 Current Config:");
@@ -58,7 +59,7 @@ static const char *const TAG = "mpl3115";
  
   void MPL3115Component::update() {
     ESP_LOGD("update", "Sending update");
-    int lux_level = myMpl3115.readResult().lux;
+    //int lux_level = myMpl3115.readResult().lux;
     //this->mpl3115_pressure_sensor_->publish_state(lux_level);
   }
 

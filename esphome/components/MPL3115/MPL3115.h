@@ -9,8 +9,7 @@ namespace mpl3115 {
 
 class MPL3115Component : public PollingComponent, public i2c::I2CDevice{
  public:
-  void set_ambient_light_sensor(sensor::Sensor *ambient_light_sensor) { ambient_light_sensor_ = ambient_light_sensor; }
-
+ 
   void setup() override;
   void dump_config() override;
   float get_setup_priority() const override;
@@ -18,7 +17,7 @@ class MPL3115Component : public PollingComponent, public i2c::I2CDevice{
 
   protected:
     void configureSensor_();
-    sensor::Sensor *ambient_light_sensor_;
+    sensor::Sensor *mpl3115_pressure_sensor_;
     
 };
 }// Namespace ESP

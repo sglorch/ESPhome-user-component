@@ -15,58 +15,58 @@
 #define _SPARKFUN_MPL3115A2_H_ 
 
 #include <Arduino.h>
-
+#include "Wire.h" // for IIC communication
 #define MPL3115A2_ADDRESS 0x60 // Unshifted 7-bit I2C address for sensor
 
 // Define MPL3115A2 registers
 enum mpl3115a2_regs
 {
-	STATUS     = 0x00,
-	OUT_P_MSB  = 0x01,
-	OUT_P_CSB  = 0x02,
-	OUT_P_LSB  = 0x03,
-	OUT_T_MSB  = 0x04,
-	OUT_T_LSB  = 0x05,
-	DR_STATUS  = 0x06,
-	OUT_P_DELTA_MSB  = 0x07,
-	OUT_P_DELTA_CSB  = 0x08,
-	OUT_P_DELTA_LSB  = 0x09,
-	OUT_T_DELTA_MSB  = 0x0A,
-	OUT_T_DELTA_LSB  = 0x0B,
-	WHO_AM_I   = 0x0C,
-	F_STATUS   = 0x0D,
-	F_DATA     = 0x0E,
-	F_SETUP    = 0x0F,
-	TIME_DLY   = 0x10,
-	SYSMOD     = 0x11,
-	INT_SOURCE = 0x12,
-	PT_DATA_CFG = 0x13,
-	BAR_IN_MSB = 0x14,
-	BAR_IN_LSB = 0x15,
-	P_TGT_MSB  = 0x16,
-	P_TGT_LSB  = 0x17,
-	T_TGT      = 0x18,
-	P_WND_MSB  = 0x19,
-	P_WND_LSB  = 0x1A,
-	T_WND      = 0x1B,
-	P_MIN_MSB  = 0x1C,
-	P_MIN_CSB  = 0x1D,
-	P_MIN_LSB  = 0x1E,
-	T_MIN_MSB  = 0x1F,
-	T_MIN_LSB  = 0x20,
-	P_MAX_MSB  = 0x21,
-	P_MAX_CSB  = 0x22,
-	P_MAX_LSB  = 0x23,
-	T_MAX_MSB  = 0x24,
-	T_MAX_LSB  = 0x25,
-	CTRL_REG1  = 0x26,
-	CTRL_REG2  = 0x27,
-	CTRL_REG3  = 0x28,
-	CTRL_REG4  = 0x29,
-	CTRL_REG5  = 0x2A,
-	OFF_P      = 0x2B,
-	OFF_T      = 0x2C,
-	OFF_H      = 0x2D	
+	MPL_STATUS     = 0x00,
+	MPL_OUT_P_MSB  = 0x01,
+	MPL_OUT_P_CSB  = 0x02,
+	MPL_OUT_P_LSB  = 0x03,
+	MPL_OUT_T_MSB  = 0x04,
+	MPL_OUT_T_LSB  = 0x05,
+	MPL_DR_STATUS  = 0x06,
+	MPL_OUT_P_DELTA_MSB  = 0x07,
+	MPL_OUT_P_DELTA_CSB  = 0x08,
+	MPL_OUT_P_DELTA_LSB  = 0x09,
+	MPL_OUT_T_DELTA_MSB  = 0x0A,
+	MPL_OUT_T_DELTA_LSB  = 0x0B,
+	MPL_WHO_AM_I   = 0x0C,
+	MPL_F_STATUS   = 0x0D,
+	MPL_F_DATA     = 0x0E,
+	MPL_F_SETUP    = 0x0F,
+	MPL_TIME_DLY   = 0x10,
+	MPL_SYSMOD     = 0x11,
+	MPL_INT_SOURCE = 0x12,
+	MPL_PT_DATA_CFG = 0x13,
+	MPL_BAR_IN_MSB = 0x14,
+	MPL_BAR_IN_LSB = 0x15,
+	MPL_P_TGT_MSB  = 0x16,
+	MPL_P_TGT_LSB  = 0x17,
+	MPL_T_TGT      = 0x18,
+	MPL_P_WND_MSB  = 0x19,
+	MPL_P_WND_LSB  = 0x1A,
+	MPL_T_WND      = 0x1B,
+	MPL_P_MIN_MSB  = 0x1C,
+	MPL_P_MIN_CSB  = 0x1D,
+	MPL_P_MIN_LSB  = 0x1E,
+	MPL_T_MIN_MSB  = 0x1F,
+	MPL_T_MIN_LSB  = 0x20,
+	MPL_P_MAX_MSB  = 0x21,
+	MPL_P_MAX_CSB  = 0x22,
+	MPL_P_MAX_LSB  = 0x23,
+	MPL_T_MAX_MSB  = 0x24,
+	MPL_T_MAX_LSB  = 0x25,
+	MPL_CTRL_REG1  = 0x26,
+	MPL_CTRL_REG2  = 0x27,
+	MPL_CTRL_REG3  = 0x28,
+	MPL_CTRL_REG4  = 0x29,
+	MPL_CTRL_REG5  = 0x2A,
+	MPL_OFF_P      = 0x2B,
+	MPL_OFF_T      = 0x2C,
+	MPL_OFF_H      = 0x2D	
 };
 
 
@@ -88,7 +88,7 @@ public:
   void setModeActive(); // Start taking measurements!
   void setOversampleRate(byte); // Sets the # of samples from 1 to 128. See datasheet.
   void enableEventFlags(); // Sets the fundamental event flags. Required during setup.
-
+  u_short readManufacturer_id();
   //Public Variables
 
 private:
