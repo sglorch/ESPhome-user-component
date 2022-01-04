@@ -5,9 +5,9 @@
 #include "esphome/components/i2c/i2c.h"
 
 namespace esphome {
-namespace opt3001 {
+namespace mpl3115 {
 
-class OPT3001Component : public PollingComponent, public i2c::I2CDevice{
+class MPL3115Component : public PollingComponent, public i2c::I2CDevice{
  public:
   void set_ambient_light_sensor(sensor::Sensor *ambient_light_sensor) { ambient_light_sensor_ = ambient_light_sensor; }
 
@@ -22,4 +22,4 @@ class OPT3001Component : public PollingComponent, public i2c::I2CDevice{
     
 };
 }// Namespace ESP
-}// Namespace OPT3001
+}// Namespace MPL3115
