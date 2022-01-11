@@ -33,7 +33,7 @@ CONFIG_SCHEMA = (
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(MPL3115Component),
-            cv.Required(CONF_TEMPERATURE): sensor.sensor_schema(
+            cv.Optional(CONF_TEMPERATURE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_CELSIUS,
                 accuracy_decimals=1,
                 device_class=DEVICE_CLASS_TEMPERATURE,
@@ -46,7 +46,7 @@ CONFIG_SCHEMA = (
                 device_class=DEVICE_CLASS_PRESSURE,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Required(CONF_ALTITUDE): sensor.sensor_schema(
+            cv.Optional(CONF_ALTITUDE): sensor.sensor_schema(
                 unit_of_measurement=UNIT_METER,
                 icon=ICON_RULER,
                 accuracy_decimals=1,
@@ -64,6 +64,15 @@ async def to_code(config):
     await cg.register_component(var, config)
     await i2c.register_i2c_device(var, config)
 
-    if CONF_ILLUMINANCE in config:
-        sens = await sensor.new_sensor(config[CONF_ILLUMINANCE])
-        cg.add(var.set_ambient_light_sensor(sens))
+    if CONF_TEMPERATURE in config:
+        sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
+        cg.add(var.set_temperature_sensor(sens))
+
+    if CONF_PRESSURE in config:
+        sens = await sensor.new_sensor(config[CONF_PRESSURE])
+        cg.add(var.set_pressure_sensor(sens))
+
+    if CONF_ALTITUDE in config:
+        sens = await sensor.new_sensor(config[CONF_ALTITUDE])
+        cg.add(var.set_altitude_sensor(sens))
+

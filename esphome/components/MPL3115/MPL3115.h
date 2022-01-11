@@ -18,7 +18,9 @@ class MPL3115Component : public PollingComponent, public i2c::I2CDevice{
   protected:
     void configureSensor_();
     sensor::Sensor *mpl3115_pressure_sensor_;
-    
+    sensor::Sensor *mpl3115_temperature_sensor_;
+    sensor::Sensor *mpl3115_altitude_sensor_;
+  
 };
 }// Namespace ESP
 }// Namespace MPL3115

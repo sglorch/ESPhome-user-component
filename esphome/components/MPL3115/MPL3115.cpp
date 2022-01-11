@@ -58,9 +58,22 @@ static const char *const TAG = "mpl3115";
   float MPL3115Component::get_setup_priority() const { return setup_priority::DATA; }
  
   void MPL3115Component::update() {
-    ESP_LOGD("update", "Sending update");
-    //int lux_level = myMpl3115.readResult().lux;
-    //this->mpl3115_pressure_sensor_->publish_state(lux_level);
+    
+    float pressure = myMpl3115.readPressure();
+    float temperature = myMpl3115.readTemp();
+    float altitude = NAN;
+
+  ESP_LOGD("update", "Sending update");
+  ESP_LOGD(TAG, "Got temperature=%.1f°C pressure=%.1fPa altitude=%.1fm", temperature, pressure,
+           altitude);
+  if (this->mpl3115_temperature_sensor_ != nullptr)
+    this->mpl3115_temperature_sensor_->publish_state(temperature);
+  if (this->mpl3115_pressure_sensor_ != nullptr)
+    this->mpl3115_pressure_sensor_->publish_state(pressure);
+  if (this->mpl3115_altitude_sensor_ != nullptr)
+    this->mpl3115_altitude_sensor_->publish_state(altitude);
+    this->status_clear_warning();    
+  
   }
 
 }// Namespace ESP
