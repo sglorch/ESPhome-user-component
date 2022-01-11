@@ -59,12 +59,12 @@ static const char *const TAG = "mpl3115";
  
   void MPL3115Component::update() {
     
-    float pressure = myMpl3115.readPressure();
+    float pressure = myMpl3115.readPressure()/100;
     float temperature = myMpl3115.readTemp();
     float altitude = NAN;
 
   ESP_LOGD("update", "Sending update");
-  ESP_LOGD(TAG, "Got temperature=%.1f°C pressure=%.1fPa altitude=%.1fm", temperature, pressure,
+  ESP_LOGD(TAG, "Got temperature=%.1f°C pressure=%.1fHPa altitude=%.1fm", temperature, pressure,
            altitude);
   if (this->mpl3115_temperature_sensor_ != nullptr)
     this->mpl3115_temperature_sensor_->publish_state(temperature);
